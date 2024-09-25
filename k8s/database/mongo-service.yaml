@@ -1,7 +1,12 @@
 apiVersion: v1
-kind: Secret
+kind: Service
 metadata:
   namespace: workshop
-  name: mongodb-secrets
-type: Opaque
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
 
