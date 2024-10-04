@@ -16,3 +16,18 @@ spec:
       containers:
         - name: backend
           image: public.ecr.aws/w6v3x6a2/three-tier-backend:latest
+          env:
+            - name: MONGO_CONN_STR
+              value: "mongodb://mongodb-service:27017/todo"
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: username
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: password
+          ports:
+            - containerPort: 3500      #Specify the port of the backend application
